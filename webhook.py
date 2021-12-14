@@ -1,6 +1,7 @@
 from flask import Flask
 import requests
 import json
+import os
 
 app = Flask(__name__)
 @app.route('/webhook', methods = ['POST'])
@@ -11,7 +12,7 @@ def webhook():
     "text": "¡Recibimos un webhook webex desde phyton!"
   })
   headers = {
-    "Authorization": "Bearer NGU3YjZhNWQtODAyMC00ZTU2LThkNDktM2NlNjVkM2FkYTA2NjlhY2NlODUtOWZh_PF84_2a001399-4e85-4adc-b568-32f8032f2ae7",
+    "Authorization": "Bearer" + os.environ["WEBEX_TEAMS_ACCESS_TOKEN"],
     "Content-Type": "application/json"
   }
   response = requests.post(url, headers=headers, data=data)
